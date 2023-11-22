@@ -1,0 +1,10 @@
+.fondo-container {
+    background-image: url('../../assets/coche-carreras-rojo-numero-10-lateral_81048-7594.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+
+.info-container{
+    background-color: red;
+}
