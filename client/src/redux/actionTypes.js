@@ -1,0 +1,7 @@
+export const SEARCHBYNAME = 'SEARCHBYNAME'
+export const GETDRIVERS= 'GETDRIVERS'
+export const GETTEAM = 'GETTEAM'
+export const FILTER = 'FILTER'
+export const ORDER= 'ORDER'
+export const POSTDRIVER= 'POSTDRIVER'
+export const SEARCHBYID = 'SEARCHBYID'

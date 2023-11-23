@@ -1,0 +1,28 @@
+.cardsContainer{
+    display: flex;
+    align-items: center;
+
+    top: 70px;
+
+    width: 100vw;
+    height: 70vh;
+    background-color: red;
+    position: relative;
+}
+
+.buttonsContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    height: 33px;
+}
+
+.buttonsContainer button{
+    width: 4px;
+    height: 33px;
+    padding: 7px 13px 10px 5px;
+}
+
+.centerCards {
+    background-color: blue;
+}

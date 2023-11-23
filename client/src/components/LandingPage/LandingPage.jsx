@@ -1,11 +1,19 @@
 import './landingPage.css'
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () =>{
+    const navigate = useNavigate();
+
+    const redirection = () =>{
+        navigate('/home')
+    }
+
     return (
         <div className='fondo-container'>
             <div className='info-container'>
-                <button>Home Page</button>
-                <p>This is a website for fans of the races</p>
+                <h1>This is a website for fans of the races</h1>
+                <p>this is a web text for races fans</p>
+                <button onClick={redirection} >get in</button>
             </div>
         </div>
     )

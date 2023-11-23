@@ -16,7 +16,7 @@ const getDriverByName = async (req, res)=>{
         });
 
         if(driversFromDb.length<15){
-            const driversFromAPI = (await axios.get(`http://localhost:5000/drivers?name.forename=${name}`)).data
+            const driversFromAPI = (await axios(`http://localhost:5000/drivers?name.forename=${name}`)).data
             const missings = 15 - driversFromDb.length;
             allDrivers = driversFromDb.concat(driversFromAPI.slice(0, missings));
         } else {
