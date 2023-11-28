@@ -14,8 +14,8 @@ const SearchBar = () =>{
     }
 
     return(
-        <nav className="container-searchBar" >
-            <input type="search" onChange={handleChange} value={name} placeholder="Buscar Corredor"/>
+        <nav>
+            <input className="input-searchBar" type="search" onChange={handleChange} value={name} placeholder="Buscar Corredor"/>
             <button onClick={handleClick} >Buscar</button>
         </nav>
     )
