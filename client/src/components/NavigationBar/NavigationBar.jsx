@@ -10,40 +10,36 @@ const NavigationBar = () => {
   const [toggleOrder, setOrder] = useState({
     AtoZ: false,
     ZtoA: false,
-    ratingAsc: false,
-    ratingDesc:false
+    birthdayAsc: false,
+    birthdayDesc:false
   })
 
   const handleFilter = optionFilter => {
     dispatch(filter(optionFilter));
   };
 
-  const handeSort = (event) => {
+  const handleSort = (event) => {
     if(event.target.name==='alphabetic'){
       setOrder((prevState)=>{
         if(!prevState.AtoZ){
-          return {...prevState, AtoZ: true, ratingAsc:false , ratingDesc:false}
+          return {...prevState, AtoZ: true, birthdayAsc:false , birthdayDesc:false}
         } else if(!prevState.ZtoA){
           return {...prevState, ZtoA: true}
         } else {
-          return {AtoZ: false , ZtoA: false, ratingAsc: false , ratingDesc: false  }
+          return {AtoZ: false , ZtoA: false, birthdayAsc: false , birthdayDesc: false  }
         }
       })
-    } else if (event.target.name==='rating'){
+    } else if (event.target.name==='birthday'){
       setOrder((prevState)=>{
-        if(!prevState.ratingAsc){
-          return {...prevState, ratingAsc: true, AtoZ:false, ZtoA:false }
-        } else if(!prevState.ratingDesc){
-          return {...prevState, ratingDesc: true}
+        if(!prevState.birthdayAsc){
+          return {...prevState, birthdayAsc: true, AtoZ:false, ZtoA:false }
+        } else if(!prevState.birthdayDesc){
+          return {...prevState, birthdayDesc: true}
         } else {
-          return {AtoZ: false , ZtoA: false,ratingAsc: false , ratingDesc: false }
+          return {AtoZ: false , ZtoA: false,birthdayAsc: false , birthdayDesc: false }
         }
       })
     }
-  };
-
-  const handleRatingSort = () => {
-    // dispatch(sortByRating());
   };
 
   useEffect(()=>{
@@ -52,12 +48,12 @@ const NavigationBar = () => {
 
   return (
     <div className='container' >
-      <button name='alphabetic' onClick={handeSort}>Sort A-Z</button>
-      <button name='rating' onClick={handeSort}>Sort by Rating</button>
+      <button name='alphabetic' onClick={handleSort}>Sort A-Z</button>
+      <button name='birthday' onClick={handleSort}>Sort by Bithday</button>
       <div>
         <span>Filter by teams:</span>
         <select onChange={(event)=>handleFilter(event.target.value)}>
-            <option value="">All Videogames</option>
+            <option value="">All Teams</option>
             {teams.map(teams => (
                 <option value={teams.name} key={teams.name}>{teams.name}</option>
             ))}

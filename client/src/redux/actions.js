@@ -1,12 +1,13 @@
 import { SEARCHBYNAME, GETDRIVERS, GETTEAM, FILTER, ORDER, POSTDRIVER, SEARCHBYID } from "./actionTypes";
 import axios from 'axios'
 
+const endpoint='http://localhost:3001/drivers'
+
 export const searchByName= (inputName)=>{
-    const endpoint= 'http://localhost:3001/pokemons/name';
     return async (dispatch)=>{
         try {
             if(!inputName) throw Error('Ingrese un nombre porfavor');
-            const { data } = await axios.get(`${endpoint}?name=${inputName}`)
+            const { data } = await axios.get(`${endpoint}?name.forename=${inputName}`)
 
             if(!data) throw Error('Algo salio mal')
             return dispatch({
@@ -21,7 +22,6 @@ export const searchByName= (inputName)=>{
 }
 
 export const getDrivers=()=>{
-    const endpoint='http://localhost:3001/videogames'
     return async (dispatch)=>{
         try {
             const { data }= await axios.get(endpoint);
@@ -38,7 +38,7 @@ export const getDrivers=()=>{
 }
 
 export const getTeams=()=>{
-    const endpoint='http://localhost:3001/genders'
+    const endpoint='http://localhost:3001/teams'
     return async (dispatch)=>{
         try {
             const { data } = await axios.get(endpoint);
@@ -52,12 +52,12 @@ export const getTeams=()=>{
     }
 }
 
-export const filter=(genre)=>{
+export const filter=(value)=>{
     return async (dispatch)=>{
         try {
             return dispatch({
                 type: FILTER,
-                payload: genre
+                payload: value
             })
         } catch (error) {
             return error.message
@@ -79,7 +79,6 @@ export const orderBy=(instructions)=>{
 }
 
 export const postDriver= (videogame)=>{
-    const endpoint='http://localhost:3001/videogames'
     return  async(dispatch)=>{
         try {
             const { data }= await axios.post(endpoint, videogame);
@@ -96,7 +95,6 @@ export const postDriver= (videogame)=>{
 }
 
 export const searchById = (id)=>{
-    const endpoint='http://localhost:3001/videogames'
     return async(dispatch)=>{
         try {
             const { data } = await axios.get(endpoint+"/"+id);

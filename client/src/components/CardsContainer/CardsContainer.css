@@ -2,11 +2,11 @@
     display: flex;
     align-items: center;
 
-    top: 70px;
+    top: 72px;
 
     width: 100vw;
-    height: 70vh;
-    background-color: red;
+    height: 80vh;
+    background-color: rgb(0, 0, 0);
     position: relative;
 }
 
@@ -24,5 +24,17 @@
 }
 
 .centerCards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     background-color: blue;
+    
+    left: 1.5%;
+    right: 1.5%;
+    height: 100%;
+
+    top: 0;
+    gap: 10px;
+
+    position: absolute;
 }

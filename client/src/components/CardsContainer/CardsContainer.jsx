@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 const CardsContainer=()=>{
     const cards = useSelector(state=> state.cards);
     const [currentPage , setCurrentPage] = useState(1);
-    const [driversPerPage] = useState(15);
+    const [driversPerPage] = useState(9);
 
     //Calculo del primer y último pokemon de la pagina
     const indexOfLastdriver= currentPage* driversPerPage;
@@ -37,8 +37,6 @@ const CardsContainer=()=>{
                     </div>
                 <button onClick={nextPage} disabled={indexOfLastdriver>=cards.length}>{">"}</button>
             </div>
-
-
         </div>
     )
 }

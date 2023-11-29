@@ -5,7 +5,7 @@ const initialState={
     teams:[],
     aux:[],
     sortOrder: {},
-    soughtById:{}
+    filtered: false
 }
 
 const reducer=(state=initialState , { type, payload })=>{
@@ -16,19 +16,18 @@ const reducer=(state=initialState , { type, payload })=>{
         case GETDRIVERS: return {...state, cards: payload, aux: payload}
         case GETTEAM: return {...state, teams: payload}
         case FILTER: {
+            let filteredCards=[];
             if(payload===''){
-                return {...state, cards: state.aux}
+                filteredCards = state.aux;
+            } else if(payload==='API'){
+                filteredCards = state.aux.filter(driver=> typeof +driver.id=== 'number')
+            } else if(payload==='DB'){
+                filteredCards = state.aux.filter(driver=> typeof +driver.id === 'string');
+            } else {
+                filteredCards = state.aux.filter(driver=> driver.teams.includes(payload));
             }
-            if(payload==='API'){
-                const fromApi = state.aux.filter(driver=> typeof +driver.id=== 'number')
-                return {...state, cards: fromApi}
-                }
-            if(payload==='DB'){
-                const fromDB = state.aux.filter(driver=> typeof +driver.id === 'string');
-                return {...state, cards: fromDB}
-                }
-            const filtereds = state.aux.filter(driver=> driver.teams.some((genre)=>genre.name === payload))
-            return {...state, cards: filtereds }
+
+            return {...state, cards: filteredCards, filtered: payload !== '' }
         }
         case ORDER: {
             let sorted=[];
@@ -36,21 +35,31 @@ const reducer=(state=initialState , { type, payload })=>{
                 sorted = [...state.cards].sort((a,b)=> a.name.localeCompare(b.name));
             } else if(payload.AtoZ && payload.ZtoA){
                 sorted = [...state.cards].sort((a,b)=> b.name.localeCompare(a.name));
-            }
+            } else if(payload.birthdayAsc && !payload.birthdayDesc){
+                sorted = [...state.cards].sort((a,b)=>{
+                    return Number(b.birthday.replace(/-/g,'')) - Number(a.birthday.replace(/-/g,''))
+                });
+            } else if(payload.birthdayAsc && payload.birthdayDesc){
+                sorted = [...state.cards].sort((a,b)=>{
+                    return Number(a.birthday.replace(/-/g,'')) - Number(b.birthday.replace(/-/g,''))
+                });
+            } else if(payload.hasFilter) {
 
-            if(payload.ratingAsc && !payload.ratingDesc){
-                sorted = [...state.cards].sort((a,b)=> b.rating - a.rating);
-            } else if(payload.ratingAsc && payload.ratingDesc){
-                sorted = [...state.cards].sort((a,b)=> a.rating - b.rating);
-            }
-
-            if(!Object.values(payload).some(value=>value===true)){
+            } else {
                 sorted = state.aux
             }
 
+            // const hasSorted = Object.values(payload).some(value=>value===true)
+
+            // if(!hasSorted && state.filtered === false){
+            //     sorted = state.aux
+            // } else if(!hasSorted && state.filtered === true){
+
+            // }
+
             return {...state , sortOrder:payload, cards: sorted}
         }
-        case SEARCHBYID: return {...state, soughtById: payload}
+        case SEARCHBYID: return {...state, cards:[payload, ...state.cards]}
         case POSTDRIVER: return {...state, cards:[...state.cards , payload]}
         default: return {...state};
     }
