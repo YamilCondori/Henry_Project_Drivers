@@ -65,8 +65,9 @@
     margin-top: -2px;
 }
 
-   /* .card__content {
-  border-radius: 8px;
-  background: #f4f4f3;
-  padding: 2px;
-} */
+.card__content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

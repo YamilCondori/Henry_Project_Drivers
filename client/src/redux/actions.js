@@ -7,7 +7,7 @@ export const searchByName= (inputName)=>{
     return async (dispatch)=>{
         try {
             if(!inputName) throw Error('Ingrese un nombre porfavor');
-            const { data } = await axios.get(`${endpoint}?name.forename=${inputName}`)
+            const { data } = await axios.get(`${endpoint}/name?name=${inputName}`)
 
             if(!data) throw Error('Algo salio mal')
             return dispatch({

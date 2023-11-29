@@ -62,7 +62,7 @@ const NavigationBar = () => {
       <div>
         <span>Filter by Origin:</span>
         <select onChange={(event)=>handleFilter(event.target.value)}>
-            <option value="">All</option>
+            <option value="api_db">All</option>
             <option value="API">API</option>
             <option value="DB">DataBase</option>
         </select>

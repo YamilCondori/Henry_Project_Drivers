@@ -14,11 +14,13 @@ const getDriverByName = async (req, res)=>{
             where: { name: {[Op.iLike]: `%${name}%`} },
             limit: 15
         });
+        const driverFromApi = (await axios(`http://localhost:5000/drivers?name.forename=${name}`)).data
 
-        if(driversFromDb.length<15){
-            const driversFromAPI = (await axios(`http://localhost:5000/drivers?name.forename=${name}`)).data
-            const missings = 15 - driversFromDb.length;
-            allDrivers = driversFromDb.concat(driversFromAPI.slice(0, missings));
+        if(driversFromDb.length + driverFromApi.length < 15){
+            const allDriversFromApi = (await axios.get('http://localhost:5000/drivers')).data
+
+            
+
         } else {
             allDrivers = driversFromDb;
         }
