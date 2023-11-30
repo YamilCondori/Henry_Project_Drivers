@@ -12,7 +12,7 @@ const initialState={
 const reducer=(state=initialState , { type, payload })=>{
     switch (type) {
         case SEARCHBYNAME: {
-            return { ...state, cards: [payload]}
+            return { ...state, cards: payload}
         }
         case GETDRIVERS: return {...state, cards: payload, aux: payload}
         case GETTEAM: return {...state, teams: payload}

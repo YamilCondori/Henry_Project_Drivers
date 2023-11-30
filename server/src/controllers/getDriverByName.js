@@ -16,13 +16,25 @@ const getDriverByName = async (req, res)=>{
         });
         const driverFromApi = (await axios(`http://localhost:5000/drivers?name.forename=${name}`)).data
 
-        if(driversFromDb.length + driverFromApi.length < 15){
+        allDrivers = allDrivers.concat(driverFromApi,driversFromDb);
+        if(allDrivers.length < 15){
             const allDriversFromApi = (await axios.get('http://localhost:5000/drivers')).data
-
-            
-
-        } else {
-            allDrivers = driversFromDb;
+            const regex = new RegExp(name, 'i');
+            for (const driver of allDriversFromApi) {
+                let nameComplete = `${driver.name.forename} ${driver.name.surname}` 
+                if (regex.test(nameComplete)) {
+                    const {id, image, nationality, teams, description, dob } = driver
+                    allDrivers.push({
+                        id,
+                        name: nameComplete,
+                        image: image.url,
+                        nationality,
+                        teams,
+                        description,
+                        birthday: dob});
+                    if (allDrivers.length >= 15) break;
+                }
+            }
         }
 
         if(allDrivers.length === 0) return res.status(404).send('Driver Not Found');
