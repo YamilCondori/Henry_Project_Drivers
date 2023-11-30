@@ -12,9 +12,15 @@ const initialState={
 const reducer=(state=initialState , { type, payload })=>{
     switch (type) {
         case SEARCHBYNAME: {
-            return { ...state, cards: payload}
+            if(payload.name === null){
+                return {...state, cards: state.aux}
+            }
+            return { ...state, cards: payload.data}
         }
-        case GETDRIVERS: return {...state, cards: payload, aux: payload}
+        case GETDRIVERS: {
+            if(payload === true) return {...state, cards:state.aux}  
+            return {...state, cards: payload, aux: payload}
+        }
         case GETTEAM: return {...state, teams: payload}
         case FILTER: {
             let filteredCards=[];

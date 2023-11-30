@@ -1,7 +1,7 @@
 import { useState } from "react"
 import './SearchBar.css'
 import { useDispatch } from "react-redux";
-import { searchByName } from "../../redux/actions";
+import { getDrivers, searchByName } from "../../redux/actions";
 
 const SearchBar = () =>{
     const [ name , setName ] = useState('')
@@ -9,10 +9,11 @@ const SearchBar = () =>{
 
     const handleClick=()=>{
         dispatch(searchByName(name))
-        console.log(name);
     }
+
     const handleChange=(event)=>{
         setName(event.target.value);
+        event.target.value==='' && dispatch(getDrivers(true))
     }
 
     return(

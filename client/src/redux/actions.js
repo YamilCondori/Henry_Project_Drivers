@@ -12,7 +12,10 @@ export const searchByName= (inputName)=>{
             if(!data) throw Error('Algo salio mal')
             return dispatch({
                 type: SEARCHBYNAME,
-                payload: data
+                payload: {
+                    data,
+                    name: inputName
+                }
             })
         }
         catch (error) {
@@ -21,9 +24,15 @@ export const searchByName= (inputName)=>{
     }
 }
 
-export const getDrivers=()=>{
+export const getDrivers=(fromAux)=>{
     return async (dispatch)=>{
         try {
+            if(fromAux){
+                return dispatch({
+                    type: GETDRIVERS,
+                    payload: fromAux
+                })
+            }
             const { data }= await axios.get(endpoint);
             if(!data) throw Error('Algo salio mal')
 
