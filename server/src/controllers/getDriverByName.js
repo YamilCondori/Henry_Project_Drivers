@@ -37,7 +37,7 @@ const getDriverByName = async (req, res)=>{
             }
         }
 
-        if(allDrivers.length === 0) return res.status(404).send('Driver Not Found');
+        if(allDrivers.length === 0) return res.status(404).json({message : 'Driver Not Found'});
 
         return res.status(200).json(allDrivers);
     } catch (error) {

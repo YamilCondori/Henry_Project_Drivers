@@ -6,7 +6,8 @@ const initialState={
     aux:[],
     sortOrder: {},
     filtered: false,
-    filteredCards: []
+    filteredCards: [],
+    soughById:{}
 }
 
 const reducer=(state=initialState , { type, payload })=>{
@@ -68,7 +69,7 @@ const reducer=(state=initialState , { type, payload })=>{
 
             return {...state , sortOrder: payload, cards: sorted}
         }
-        case SEARCHBYID: return {...state, cards:[payload, ...state.cards]}
+        case SEARCHBYID: return {...state, soughById: payload}
         case POSTDRIVER: return {...state, cards:[...state.cards , payload]}
         default: return {...state};
     }

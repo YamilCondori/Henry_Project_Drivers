@@ -7,8 +7,18 @@ const getDriverByid = async (req, res)=>{
         if(!id) throw Error('Please put an id Driver to find')
         if(typeof +id !== 'number' && typeof id !== 'string') throw Error('invalid type of id');
         if(typeof +id === 'number'){
-            let soughAPI = (await axios.get("http://localhost:5000/drivers/" + id)).data
-            return res.status(201).json(soughAPI);
+            let {name, number, image, dob, nationality, teams, description, driverRef} = (await axios.get("http://localhost:5000/drivers/" + id)).data
+            return res.status(201).json({
+                id: +id,
+                name: `${name.forename} ${name.surname}`,
+                number,
+                image: image.url,
+                birthdate: dob,
+                nationality,
+                teams,
+                description,
+                driverRef
+            });
         } else if(typeof id === 'string'){
             const soughDB = await Driver.findByPk(id, {
                 include: Team

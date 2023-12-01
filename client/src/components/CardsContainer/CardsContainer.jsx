@@ -29,8 +29,8 @@ const CardsContainer=()=>{
                     <div className="centerCards" >
                         { currentDrivers?.map(driver => {
                             return (
-                                <Link to={`/detailPage/${driver.id}`} key={driver.id+"-Link"}>
-                                    <Card  key={driver.id+"-card"} props={driver} showAll={false} />
+                                <Link to={`/home/detailpage/${driver.id}`} key={driver.id+"-Link"} className={`cards-link`}>
+                                    <Card  key={driver.id+"-card"} props={driver}/>
                                 </Link>
                             )
                         })}
