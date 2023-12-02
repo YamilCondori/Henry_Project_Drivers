@@ -17,7 +17,12 @@ const DetailCard = () =>{
     return(
         <div className="fond-body">
             <div className="carnet">
-                <Card props={searched} />
+                <div className="tools-carnet">
+                    <div className="red box"><span className="circle"></span></div>
+                    <div className="yellow box"><span className="circle"></span></div>
+                    <div className="green box"><span className="circle"></span></div>
+                </div>
+                <img src={searched.image} alt="" />
             </div>
         </div>
     )
