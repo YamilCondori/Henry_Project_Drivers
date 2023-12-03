@@ -26,9 +26,8 @@
 }
 
 .carnet img {
-    margin-top: 50px;
-    width: 333px;
-    height: 450px;
+    margin-top: 4.9%;
+    height: 91.2%;
     border-radius: 8px 8px 0px 8px;
 }
 
@@ -72,3 +71,14 @@
     padding: 1px;
     border-radius: 50%;
    }
+
+
+.info-container-carnet {
+    margin-top: 4.9%;
+    display: flex;
+    justify-content: center;
+}
+
+.info-container-carnet h3{
+    color: black;
+}

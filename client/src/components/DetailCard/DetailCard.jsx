@@ -23,6 +23,10 @@ const DetailCard = () =>{
                     <div className="green box-detail"><span className="circle"></span></div>
                 </div>
                 <img src={searched.image} alt="" />
+                {console.log(searched)}
+                <div className="info-container-carnet">
+                    <h3>{searched.driverRef.toUpperCase()}</h3>
+                </div>
             </div>
         </div>
     )
