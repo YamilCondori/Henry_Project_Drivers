@@ -18,9 +18,9 @@ const DetailCard = () =>{
         <div className="fond-body">
             <div className="carnet">
                 <div className="tools-carnet">
-                    <div className="red box"><span className="circle"></span></div>
-                    <div className="yellow box"><span className="circle"></span></div>
-                    <div className="green box"><span className="circle"></span></div>
+                    <div className="red box-detail"><span className="circle"></span></div>
+                    <div className="yellow box-detail"><span className="circle"></span></div>
+                    <div className="green box-detail"><span className="circle"></span></div>
                 </div>
                 <img src={searched.image} alt="" />
             </div>
