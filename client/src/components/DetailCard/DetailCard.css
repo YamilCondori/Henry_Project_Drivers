@@ -29,15 +29,17 @@
     margin-top: 4.9%;
     height: 91.2%;
     border-radius: 8px 8px 0px 8px;
+    border-right: 1px #000 solid;
 }
 
 .tools-carnet {
     display: flex;
     align-items: center;
-    padding: 9px;
+    padding: 8px;
     border-radius: 8px 8px 3px 3px;
     background: #454a50;
     margin: -3.52px 0px 0px -4px;
+    border: 1px #000 solid;
 
     width: 98.9%;
     height: 40px;
@@ -48,7 +50,10 @@
 }
 
 .tools-carnet h3{
-    margin-left: 440px;
+    margin-left: auto;
+    margin-right: 30px;
+    color: white;
+    font-size: 30px;
 }
 
 .circle {
@@ -96,7 +101,6 @@
 .text-carnet p:nth-of-type(-n+4) {
     display: inline-block;
     margin-right: 10px; /* Ajusta el margen derecho según sea necesario */
-    border-bottom: 2px solid #ccc; /* Puedes ajustar el color y grosor del borde según sea necesario */
     padding-bottom: 1px; /* Ajusta este valor para controlar el espacio entre el texto y el borde */
     margin-bottom: 3px; /* Ajusta este valor según sea necesario */
 }

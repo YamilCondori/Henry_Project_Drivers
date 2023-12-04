@@ -21,11 +21,11 @@ const DetailCard = () =>{
                     <div className="red box-detail"><span className="circle"></span></div>
                     <div className="yellow box-detail"><span className="circle"></span></div>
                     <div className="green box-detail"><span className="circle"></span></div>
-                    <h3>{searched.driverRef?.toUpperCase()}</h3>
+                    <h3>{searched.driverRef?.toUpperCase()}   N°{searched.number}</h3>
                 </div>
                 <img src={searched.image} alt="" />
                 <div className="text-carnet">
-                    <h5>NAME COMPLETE:</h5>
+                    <h5>NAME:</h5>
                     <p>{searched.name && searched.name}</p>
                     <div className="line" />
                     <h5>NATIONALITY:</h5>
