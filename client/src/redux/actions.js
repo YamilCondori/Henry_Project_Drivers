@@ -87,10 +87,10 @@ export const orderBy=(instructions)=>{
     }
 }
 
-export const postDriver= (videogame)=>{
+export const postDriver= (driver)=>{
     return  async(dispatch)=>{
         try {
-            const { data }= await axios.post(endpoint, videogame);
+            const { data }= await axios.post(endpoint, driver);
             if(!data) throw Error('algo paso')
 
             return dispatch({

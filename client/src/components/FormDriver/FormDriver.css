@@ -1,0 +1,115 @@
+.content-page-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.form {
+    width: 326px;
+    height: 406px;
+    border: 2px #000 solid;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 20px;
+    position: relative;
+}
+
+.form h4 {
+    text-align: center;
+    margin: 0;
+    margin-top: -10px;
+    border-bottom: 1px #000 solid;
+}
+
+.form div {
+    width: 326px;
+    height: 38px;
+    position: relative;
+}
+
+.form div:last-of-type{
+    display: flex;
+    height: 100%;
+}
+
+.form textarea{
+    width: calc(100% - 90px);
+    height: 60px;
+}
+
+.form label{
+    display: inline-block;
+    width: 80px;
+
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.form input {
+    width: calc(100% - 90px);
+    border: none;
+    outline: none;
+    border-bottom: 2px #8d0000 solid;
+}
+
+.form input[type='file']{
+    position: absolute;
+    left: 24%;
+    z-index: 10;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#button-wrapper{
+    display: inline-block;
+    background-color: red;
+    width: calc(100% - 85px);
+    height: 23px;
+    color: white;
+    text-align: center;
+}
+
+.form p {
+    position: absolute;
+    margin: 0;
+    left: 25%;
+    
+    font-weight: 700;
+    font-size: 12px;
+    color: red;
+}
+
+#teams {
+    width: 70px;
+}
+
+.form ul {
+    display: flex;
+    width: auto;
+    height: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#button-ul{
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+}
+
+.form li {
+    background-color: #8d0000;
+    border-radius: 10px;
+    font-size: 13px;
+    padding-right: 7px;
+    color: white;
+}

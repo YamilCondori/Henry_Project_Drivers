@@ -17,10 +17,7 @@ const getDrivers = async (req, res)=>{
                     id,
                     name: `${name.forename} ${name.surname}`,
                     image: image.url,
-                    nationality,
-                    teams,
-                    description,
-                    birthday: dob
+                    teams
                 }
             })
 
