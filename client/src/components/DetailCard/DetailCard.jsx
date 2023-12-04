@@ -16,16 +16,33 @@ const DetailCard = () =>{
 
     return(
         <div className="fond-body">
+            {console.log(searched)}
             <div className="carnet">
                 <div className="tools-carnet">
                     <div className="red box-detail"><span className="circle"></span></div>
                     <div className="yellow box-detail"><span className="circle"></span></div>
                     <div className="green box-detail"><span className="circle"></span></div>
+                    <h3>{searched.driverRef.toUpperCase()}</h3>
                 </div>
                 <img src={searched.image} alt="" />
-                {console.log(searched)}
-                <div className="info-container-carnet">
-                    <h3>{searched.driverRef.toUpperCase()}</h3>
+                <div className="text-carnet">
+                    <h5>NAME COMPLETE:</h5>
+                    <p>{searched.name}</p>
+                    <div className="line" />
+                    <h5>NATIONALITY:</h5>
+                    <p>{searched.nationality}</p>
+                    <div className="line" />
+                    <h5>TEAMS:</h5>
+                    <p>{searched.teams}</p>
+                    <div className="line" />
+                    <h5>BIRTHDATE:</h5>
+                    <p>{searched.birthdate}</p>
+                    <div className="line" />
+                    <h5>DESCRIPTION:</h5>
+                    <p>{searched.description}</p>
+                </div>
+                <div>
+
                 </div>
             </div>
         </div>
