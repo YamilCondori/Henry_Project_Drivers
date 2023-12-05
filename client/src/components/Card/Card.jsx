@@ -1,4 +1,5 @@
 import './card.css'
+import defaultImage from '../../assets/driverdefault.jpg'
 
 const Card=({props})=>{
     const { id, image , name, teams} = props
@@ -20,7 +21,7 @@ const Card=({props})=>{
                 </div>
                 <div className='card__content'>
                     <h3 className={"title"}>{name}</h3>
-                    {image ? <img src={image} alt="" /> : <p>No image available</p>}
+                    {image ? <img src={image} alt="" /> : <img src={defaultImage} />}
                     <p>{teams}</p>
                 </div>
             </div>
