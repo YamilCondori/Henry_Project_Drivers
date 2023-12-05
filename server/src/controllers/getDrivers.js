@@ -1,10 +1,20 @@
-const { Driver } = require('../db');
+const { Driver, Team } = require('../db');
 const axios = require('axios');
 
 const getDrivers = async (req, res)=>{
     try {
-        const driversFromDb = await Driver.findAll()
+        let driversFromDb = await Driver.findAll({
+            include: Team,
+        })
 
+        driversFromDb = driversFromDb.map(({id, name, surname, image, Teams})=>{
+            return {
+                id,
+                name: `${name} ${surname}`,
+                image: image,
+                teams: Teams.map(team=> team.name).join(', ')
+            }
+        })
         //arreglo de objetos
         //donde cada objeto es un driver con su informacion
         //Si no tiene imagen, debera colocarse una por defecto
@@ -12,7 +22,7 @@ const getDrivers = async (req, res)=>{
             const driversFromApi = (await axios.get("http://localhost:5000/drivers")).data
             
             //Aplicar iterador para controlar los Driver que no tengan una imagen
-            const allDriversInfo = driversFromApi.slice(0, 20).map(({id, name, image, nationality, teams, description, dob})=>{
+            const allDriversInfo = driversFromApi.slice(0, 20 - driversFromDb.length).map(({id, name, image, teams,})=>{
                 return {
                     id,
                     name: `${name.forename} ${name.surname}`,
@@ -21,7 +31,7 @@ const getDrivers = async (req, res)=>{
                 }
             })
 
-            return res.status(201).json(allDriversInfo);
+            return res.status(201).json(driversFromDb.concat(allDriversInfo));
         }
 
         return res.status(200).json(driversFromDb)

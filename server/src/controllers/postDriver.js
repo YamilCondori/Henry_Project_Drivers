@@ -14,9 +14,10 @@ const postDriver = async (req, res)=>{
 
         if(teams.length){
             teams.map(async team=>{
-                const selectedTeam = await Team.findByPk(team.id); 
-
-                selectedTeam && await driverCreated.addTeam(selectedTeam);
+                const selectedTeam = await Team.findOne({
+                    where: {name: team}
+                }); 
+                selectedTeam && await driverCreated.addTeams(selectedTeam);
             })
         }
 
