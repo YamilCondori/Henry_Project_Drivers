@@ -13,8 +13,10 @@ const initialState={
 const reducer=(state=initialState , { type, payload })=>{
     switch (type) {
         case SEARCHBYNAME: {
-            if(payload.name === null){
-                return {...state, cards: state.aux}
+            if(payload === 'deleted'){
+                return state.filtered
+                ? {...state, cards: state.filteredCards}
+                : {...state, cards: state.aux}
             }
             return { ...state, cards: payload.data}
         }

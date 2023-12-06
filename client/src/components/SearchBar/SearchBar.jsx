@@ -13,7 +13,7 @@ const SearchBar = () =>{
 
     const handleChange=(event)=>{
         setName(event.target.value);
-        event.target.value==='' && dispatch(getDrivers(true))
+        event.target.value==='' && dispatch(searchByName('deleted'))
     }
 
     return(

@@ -40,4 +40,6 @@
 .cards-link {
     text-decoration: none;
     color: black;
+    width: 150px;
+    height: 255px;
 }

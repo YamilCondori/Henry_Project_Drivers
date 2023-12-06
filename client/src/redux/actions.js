@@ -6,6 +6,12 @@ const endpoint='http://localhost:3001/drivers'
 export const searchByName= (inputName)=>{
     return async (dispatch)=>{
         try {
+            if(inputName ==='deleted'){
+                return dispatch({
+                    type: SEARCHBYNAME,
+                    payload: 'deleted'
+                })
+            }
             if(!inputName) throw Error('Ingrese un nombre porfavor');
             const { data } = await axios.get(`${endpoint}/name?name=${inputName}`)
 
@@ -27,12 +33,6 @@ export const searchByName= (inputName)=>{
 export const getDrivers=(fromAux)=>{
     return async (dispatch)=>{
         try {
-            if(fromAux){
-                return dispatch({
-                    type: GETDRIVERS,
-                    payload: fromAux
-                })
-            }
             const { data }= await axios.get(endpoint);
             if(!data) throw Error('Algo salio mal')
 
