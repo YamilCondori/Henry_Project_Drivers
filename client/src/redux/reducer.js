@@ -33,38 +33,43 @@ const reducer=(state=initialState , { type, payload })=>{
                 : {...state, cards: state.aux}
             } else if(payload==='API'){
                 state.filtered
-                ? filteredCards = state.filteredCards.filter(driver=> typeof +driver.id=== 'number')
-                : filteredCards = state.aux.filter(driver=> typeof +driver.id=== 'number')
+                ? filteredCards = state.filteredCards.filter(driver=> !isNaN(driver.id))
+                : filteredCards = state.aux.filter(driver=> !isNaN(driver.id))
                 return {...state, cards: filteredCards}
             } else if(payload==='DB'){
                 state.filtered
-                ? filteredCards = state.filteredCards.filter(driver=> typeof +driver.id=== 'string')
-                : filteredCards = state.aux.filter(driver=> typeof +driver.id === 'string');
+                ? filteredCards = state.filteredCards.filter(driver=> isNaN(driver.id))
+                : filteredCards = state.aux.filter(driver=> isNaN(driver.id));
                 return {...state, cards: filteredCards}
             } else {
-                filteredCards = state.aux.filter(driver=> driver.teams.includes(payload));
+                filteredCards = state.aux.filter(driver=> driver.teams && driver.teams.includes(payload));
             }
 
             return {...state, cards: filteredCards, filtered: payload !== '', filteredCards }
         }
         case ORDER: {
             let sorted=[];
-            if(payload.AtoZ && !payload.ZtoA){
-                sorted = [...state.cards].sort((a,b)=> a.name.localeCompare(b.name));
-            } else if(payload.AtoZ && payload.ZtoA){
-                sorted = [...state.cards].sort((a,b)=> b.name.localeCompare(a.name));
-            } else if(payload.birthdayAsc && !payload.birthdayDesc){
-                sorted = [...state.cards].sort((a,b)=>{
-                    return Number(b.birthday.replace(/-/g,'')) - Number(a.birthday.replace(/-/g,''))
-                });
-            } else if(payload.birthdayAsc && payload.birthdayDesc){
-                sorted = [...state.cards].sort((a,b)=>{
-                    return Number(a.birthday.replace(/-/g,'')) - Number(b.birthday.replace(/-/g,''))
-                });
-            } else if(state.filtered){
-                sorted = state.filteredCards
-            } else {
-                sorted = state.aux
+            const {alphabetic, birthdate } = payload
+            if(alphabetic.active){
+                if(alphabetic.asc){
+                    sorted = [...state.cards].sort((a,b)=> a.name.localeCompare(b.name));
+                } else if(alphabetic.desc){
+                    sorted = [...state.cards].sort((a,b)=> b.name.localeCompare(a.name));
+                }
+            } else if(birthdate.active){
+                if(birthdate.asc){
+                    sorted = [...state.cards].sort((a,b)=>{
+                        return Number(b.birthdate.replace(/-/g,'')) - Number(a.birthdate.replace(/-/g,''))
+                    });
+                } else if (birthdate.desc){
+                    sorted = [...state.cards].sort((a,b)=>{
+                        return Number(a.birthdate.replace(/-/g,'')) - Number(b.birthdate.replace(/-/g,''))
+                    });
+                }
+            } else if(state.filtered) {
+                sorted = [...state.filteredCards]
+            } else{
+                sorted = [...state.aux]
             }
 
             return {...state , sortOrder: payload, cards: sorted}

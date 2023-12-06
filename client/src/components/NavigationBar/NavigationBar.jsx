@@ -9,65 +9,46 @@ const NavigationBar = () => {
   const teams = useSelector(state => state.teams);
   const [orderOptions, setOrderOptions] = useState({
     alphabetic: { active: false, asc: false , desc: false},
-    birthday: { active: false, asc: false, desc: false }
+    birthdate: { active: false, asc: false, desc: false }
   })
 
-  const handleFilter = optionFilter => {
+  const handleFilter = (optionFilter) => {
     dispatch(filter(optionFilter));
   };
 
   const handleSort = (option) => {
-    // if(event.target.name==='alphabetic'){
-    //   setOrder((prevState)=>{
-    //     if(!prevState.AtoZ){
-    //       return {...prevState, AtoZ: true, birthdayAsc:false , birthdayDesc:false}
-    //     } else if(!prevState.ZtoA){
-    //       return {...prevState, ZtoA: true}
-    //     } else {
-    //       return {AtoZ: false , ZtoA: false, birthdayAsc: false , birthdayDesc: false  }
-    //     }
-    //   })
-    // } else if (event.target.name==='birthday'){
-    //   setOrder((prevState)=>{
-    //     if(!prevState.birthdayAsc){
-    //       return {...prevState, birthdayAsc: true, AtoZ:false, ZtoA:false }
-    //     } else if(!prevState.birthdayDesc){
-    //       return {...prevState, birthdayDesc: true}
-    //     } else {
-    //       return {AtoZ: false , ZtoA: false,birthdayAsc: false , birthdayDesc: false }
-    //     }
-    //   })
-    // }
     setOrderOptions(prevState => {
       const newOptions = { ...prevState };
-
-      // console.log(option, 'aca');s
+      const disabled = { active: false, asc: false , desc: false}
+      
       if(option === 'alphabetic'){
-        if(!prevState.alphabetic.asc){
-          newOptions.alphabetic.asc = true
-        } else if(!prevState.alphabetic.desc) {
-          newOptions.alphabetic.desc = true;
-        } else{
-          newOptions.alphabetic.desc = false;
-          newOptions.alphabetic.asc = false;
+        newOptions.birthdate = disabled
+        if(prevState.alphabetic.desc){
+          newOptions.alphabetic = disabled
+        } else if(!prevState.alphabetic.asc) {
+          newOptions.alphabetic = { active: true, asc: true , desc: false}
+        } else if(!prevState.alphabetic.desc){
+          newOptions.alphabetic = { active: true, asc: false , desc: true};
         }
-        // newOptions.alphabetic.active = !prevState.alphabetic.desc ? false : true
-        if(Object.keys(prevState.alphabetic).some(prop => prop === false)){
-          newOptions.alphabetic.active = true
-        } else{
-          newOptions.alphabetic.active = false
-        }
-        // console.log('aca', newOptions.alphabetic);
-        // newOptions.alphabetic.active = true
       }
-      console.log(newOptions.alphabetic);
+
+      if(option === 'birthdate'){
+        newOptions.alphabetic = disabled
+        if(prevState.birthdate.desc){
+          newOptions.birthdate = disabled
+        } else if(!prevState.birthdate.asc) {
+          newOptions.birthdate = { active: true, asc: true , desc: false}
+        } else if(!prevState.birthdate.desc){
+          newOptions.birthdate = { active: true, asc: false , desc: true};
+        }
+      }
+
       return newOptions;
     });
   };
 
   useEffect(()=>{
-    // dispatch(orderBy(toggleOrder))
-    console.log(orderOptions.alphabetic);
+    dispatch(orderBy(orderOptions))
   },[orderOptions])
 
   return (
@@ -75,8 +56,8 @@ const NavigationBar = () => {
       <button name='alphabetic' onClick={() => handleSort('alphabetic')} >
         {orderOptions.alphabetic.active ? (orderOptions.alphabetic.asc ? 'A-Z' : 'Z-A') : 'Alphabetic'}
       </button>
-      <button name='birthday' onClick={() => handleSort('birthday')}>
-        {orderOptions.birthday.active ? (orderOptions.birthday.asc ? 'Birthday Asc' : 'Birthday Desc') : 'Sort by Birthday'}
+      <button name='birthdate' onClick={() => handleSort('birthdate')}>
+        {orderOptions.birthdate.active ? (orderOptions.birthdate.asc ? 'birthdate Asc' : 'birthdate Desc') : 'Sort by birthdate'}
       </button>
       <div>
         <select onChange={(event)=>handleFilter(event.target.value)}>

@@ -8,12 +8,13 @@ const getDrivers = async (req, res)=>{
             include: Team,
         })
 
-        driversFromDb = driversFromDb.map(({id, name, surname, image, Teams})=>{
+        driversFromDb = driversFromDb.map(({id, name, surname, image,birthdate, Teams})=>{
             return {
                 id,
                 name: `${name} ${surname}`,
                 image: image,
-                teams: Teams.map(team=> team.name).join(', ')
+                teams: Teams.map(team=> team.name).join(', '),
+                birthdate
             }
         })
         //arreglo de objetos
@@ -22,12 +23,13 @@ const getDrivers = async (req, res)=>{
         const driversFromApi = (await axios.get("http://localhost:5000/drivers")).data
             
         //Aplicar iterador para controlar los Driver que no tengan una imagen
-        const allDriversInfo = driversFromApi.map(({id, name, image, teams,})=>{
+        const allDriversInfo = driversFromApi.map(({id, name, image, teams, dob,})=>{
             return {
                 id,
                 name: `${name.forename} ${name.surname}`,
                 image: image.url || defaultImage,
-                teams
+                teams,
+                birthdate: dob
             }
         })
 
