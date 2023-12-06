@@ -43,13 +43,24 @@ const NavigationBar = () => {
 
       // console.log(option, 'aca');s
       if(option === 'alphabetic'){
-        if(prevState.alphabetic.asc){
-          newOptions.alphabetic.desc = !prevState.alphabetic.desc
+        if(!prevState.alphabetic.asc){
+          newOptions.alphabetic.asc = true
+        } else if(!prevState.alphabetic.desc) {
+          newOptions.alphabetic.desc = true;
+        } else{
+          newOptions.alphabetic.desc = false;
+          newOptions.alphabetic.asc = false;
         }
-        newOptions.alphabetic.asc = !prevState.alphabetic.asc
-        newOptions.alphabetic.active = !prevState.alphabetic.desc ? false : true
+        // newOptions.alphabetic.active = !prevState.alphabetic.desc ? false : true
+        if(Object.keys(prevState.alphabetic).some(prop => prop === false)){
+          newOptions.alphabetic.active = true
+        } else{
+          newOptions.alphabetic.active = false
+        }
+        // console.log('aca', newOptions.alphabetic);
+        // newOptions.alphabetic.active = true
       }
-
+      console.log(newOptions.alphabetic);
       return newOptions;
     });
   };
