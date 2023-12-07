@@ -12,7 +12,7 @@ const getDrivers = async (req, res)=>{
             return {
                 id,
                 name: `${name} ${surname}`,
-                image: image,
+                image: image || defaultImage,
                 teams: Teams.map(team=> team.name).join(', '),
                 birthdate
             }
