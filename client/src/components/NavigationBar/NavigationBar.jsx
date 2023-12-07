@@ -82,7 +82,7 @@ const NavigationBar = () => {
             <option value="DB">DataBase</option>
         </select>
       </div>
-      <SearchBar/>
+      <SearchBar from={filtersActive.origin || filtersActive.teams ? 'cards' : false}/>
     </div>
   );
 };

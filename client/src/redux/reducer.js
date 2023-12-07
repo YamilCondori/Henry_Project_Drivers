@@ -25,6 +25,10 @@ const reducer=(state=initialState , { type, payload })=>{
                 } else{
                     return {...state, cards: state.aux}
                 }
+            } else if(payload.from==='cards'){
+                const regex = new RegExp(payload.inputName, 'i');
+                const result = [...state.cards].filter(driver=> regex.test(driver.name))
+                return {...state, cards: result}
             }
             return { ...state, cards: payload.data}
         }
@@ -34,7 +38,6 @@ const reducer=(state=initialState , { type, payload })=>{
         }
         case GETTEAM: return {...state, teams: payload}
         case FILTER: {
-            console.log(payload);
             const { teams , origin  } = payload.filterActives;
             const {value} = payload
             let result = [];
@@ -81,39 +84,6 @@ const reducer=(state=initialState , { type, payload })=>{
             filtersCombined = teams && origin ? result : []
 
             return {...state, cards: result, filtered: payload.filterActives, filteredTeams, filteredOrigin, filtersCombined: filtersCombined}
-            // const { teams, origin } = payload.filterActives;
-            // const { value } = payload;
-            // let result = [];
-            // let filteredTeams = [];
-            // let filteredOrigin = [];
-        
-            // if (value === '') {
-            //     return origin
-            //         ? { ...state, cards: state.filteredOrigin, filtered: payload.filterActives }
-            //         : { ...state, cards: state.aux, filtered: payload.filterActives };
-            // }
-        
-            // if (value === 'api_db' || value === 'API' || value === 'DB') {
-            //     if (teams) {
-            //         result = value === 'API' ? state.filteredTeams.filter(driver => !isNaN(driver.id)) : state.filteredTeams.filter(driver => isNaN(driver.id));
-            //         filteredTeams = state.filteredTeams;
-            //         filteredOrigin = value === 'API' ? state.aux.filter(driver => !isNaN(driver.id)) : state.aux.filter(driver => isNaN(driver.id));
-            //     } else {
-            //         result = value === 'API' ? state.aux.filter(driver => !isNaN(driver.id)) : state.aux.filter(driver => isNaN(driver.id));
-            //         return { ...state, cards: result, filtered: payload.filterActives, filteredOrigin: result };
-            //     }
-            // } else {
-            //     if (origin) {
-            //         result = state.filteredOrigin.filter(driver => driver.teams && driver.teams.includes(value));
-            //         filteredTeams = state.aux.filter(driver => driver.teams && driver.teams.includes(value));
-            //         filteredOrigin = state.filteredOrigin;
-            //     } else {
-            //         result = state.aux.filter(driver => driver.teams && driver.teams.includes(value));
-            //         return { ...state, cards: result, filtered: payload.filterActives, filteredTeams: result };
-            //     }
-            // }
-        
-            // return { ...state, cards: result, filtered: payload.filterActives, filteredTeams, filteredOrigin };
         }
         case ORDER: {
             let sorted=[];

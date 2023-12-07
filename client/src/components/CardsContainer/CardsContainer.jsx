@@ -13,7 +13,7 @@ const CardsContainer=()=>{
     //Calculo del primer y último pokemon de la pagina
     const indexOfLastdriver= currentPage* driversPerPage;
     const indexOfFirstdriver = indexOfLastdriver - driversPerPage;
-    const currentDrivers= cards.slice(indexOfFirstdriver,indexOfLastdriver);
+    const currentDrivers= cards?.slice(indexOfFirstdriver,indexOfLastdriver);
 
     const previousPage=()=>{
         setCurrentPage(prevPage=>prevPage-1);

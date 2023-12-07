@@ -3,9 +3,16 @@ import axios from 'axios'
 
 const endpoint='http://localhost:3001/drivers'
 
-export const searchByName= (inputName)=>{
+export const searchByName= (inputName, from)=>{
     return async (dispatch)=>{
         try {
+            if(from === 'cards'){
+                console.log('aca');
+                return dispatch({
+                    type: SEARCHBYNAME,
+                    payload: {from, inputName}
+                })
+            }
             if(inputName ==='deleted'){
                 return dispatch({
                     type: SEARCHBYNAME,
