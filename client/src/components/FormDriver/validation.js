@@ -8,6 +8,7 @@ export const validation=(driverData)=>{
     if(!driverData.name) errors.name = 'Por favor ingrese un nombre'
     if(driverData.name !== driverData.name.toLowerCase()) errors.name='El nombre debe estar en minusculas'
     if(hasNumbers.test(driverData.name)) errors.name='El nombre no puede contener números'
+    if(driverData.name.length > 64) errors.name= 'El nombre no puede ser tan largo'
 
     if(!driverData.surname) errors.surname = 'Por favor ingrese un nombre'
     if(driverData.surname !== driverData.surname.toLowerCase()) errors.surname='El nombre debe estar en minusculas'

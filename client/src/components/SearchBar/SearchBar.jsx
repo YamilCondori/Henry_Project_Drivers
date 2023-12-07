@@ -9,8 +9,8 @@ const SearchBar = ({from}) =>{
 
     const handleClick=()=>{
         from 
-        ? dispatch(searchByName(name, from))
-        : dispatch(searchByName(name))
+        ? dispatch(searchByName(name.toLocaleLowerCase(), from))
+        : dispatch(searchByName(name.toLocaleLowerCase()))
     }
 
     const handleChange=(event)=>{

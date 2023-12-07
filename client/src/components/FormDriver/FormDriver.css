@@ -113,3 +113,11 @@
     padding-right: 7px;
     color: white;
 }
+
+.correct-image {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 30%;
+    left: 39%;
+}

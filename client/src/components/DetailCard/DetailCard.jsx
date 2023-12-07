@@ -15,7 +15,6 @@ const DetailCard = () =>{
 
     return(
         <div className="fond-body">
-            {console.log(searched)}
             <div className="carnet">
                 <div className="tools-carnet">
                     <div className="red box-detail"><span className="circle"></span></div>

@@ -7,7 +7,6 @@ export const searchByName= (inputName, from)=>{
     return async (dispatch)=>{
         try {
             if(from === 'cards'){
-                console.log('aca');
                 return dispatch({
                     type: SEARCHBYNAME,
                     payload: {from, inputName}
@@ -37,7 +36,7 @@ export const searchByName= (inputName, from)=>{
     }
 }
 
-export const getDrivers=(fromAux)=>{
+export const getDrivers=()=>{
     return async (dispatch)=>{
         try {
             const { data }= await axios.get(endpoint);
