@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validation } from "./validation";
 import { useDispatch, useSelector } from "react-redux";
-import { postDriver } from "../../redux/actions";
+import { getTeams, postDriver } from "../../redux/actions";
 import './FormDriver.css'
 
 const FormPage=()=>{
@@ -57,7 +57,11 @@ const FormPage=()=>{
             teams: true
         })
     }
-        
+
+    useEffect(()=>{
+        !teams.length && dispatch(getTeams())
+    }, [])
+
     const handleSubmit=(event)=>{
         event.preventDefault()
         const {name, surname, image, nationality, birthdate, description, teams} = driverData
@@ -105,7 +109,7 @@ const FormPage=()=>{
             <div>
             <label htmlFor="image">IMAGE:</label>
             <div id="button-wrapper">
-                {driverData.image ? 'Uploaded' : 'Upload Image...'}
+                {driverData.image ? 'Uploaded' : 'Upload link Image...'}
             </div>
             <input onChange={handleChange} name="image" value={driverData.image} type="file" className="upload-box" placeholder="Upload File" id="upload"/>
             {touched.image && errors.image ? <p>{errors.image}</p> : null}

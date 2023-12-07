@@ -61,12 +61,15 @@ export const getTeams=()=>{
     }
 }
 
-export const filter=(value)=>{
+export const filter=(value, filterActives)=>{
     return async (dispatch)=>{
         try {
             return dispatch({
                 type: FILTER,
-                payload: value
+                payload: {
+                    value,
+                    filterActives
+                }
             })
         } catch (error) {
             return error.message

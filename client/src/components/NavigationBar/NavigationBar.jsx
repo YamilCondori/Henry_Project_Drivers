@@ -12,8 +12,18 @@ const NavigationBar = () => {
     birthdate: { active: false, asc: false, desc: false }
   })
 
-  const handleFilter = (optionFilter) => {
-    dispatch(filter(optionFilter));
+  const [filtersActive, setFilterActive] = useState({
+    origin: false,
+    teams: false
+  })
+
+  const handleFilter = (optionFilter, filterFrom) => {
+    setFilterActive(prevState=>{
+      const newFilterActives = {...prevState}
+      newFilterActives[filterFrom] = optionFilter !== '' && optionFilter !== 'api_db'
+      dispatch(filter(optionFilter, newFilterActives));
+      return newFilterActives
+    })
   };
 
   const handleSort = (option) => {
@@ -43,13 +53,11 @@ const NavigationBar = () => {
         }
       }
 
+      dispatch(orderBy(newOptions))
       return newOptions;
     });
   };
 
-  useEffect(()=>{
-    dispatch(orderBy(orderOptions))
-  },[orderOptions])
 
   return (
     <div className='container' >
@@ -60,7 +68,7 @@ const NavigationBar = () => {
         {orderOptions.birthdate.active ? (orderOptions.birthdate.asc ? 'birthdate Asc' : 'birthdate Desc') : 'Sort by birthdate'}
       </button>
       <div>
-        <select onChange={(event)=>handleFilter(event.target.value)}>
+        <select onChange={(event)=>handleFilter(event.target.value, 'teams')}>
             <option value="">All Teams</option>
             {teams.map(teams => (
                 <option value={teams.name} key={teams.name}>{teams.name}</option>
@@ -68,7 +76,7 @@ const NavigationBar = () => {
         </select>
       </div>
       <div>
-        <select onChange={(event)=>handleFilter(event.target.value)}>
+        <select onChange={(event)=>handleFilter(event.target.value, 'origin')}>
             <option value="api_db">All</option>
             <option value="API">API</option>
             <option value="DB">DataBase</option>

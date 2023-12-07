@@ -3,7 +3,7 @@ import CardsContainer from "../CardsContainer/CardsContainer";
 import './Home.css'
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getDrivers, getTeams } from "../../redux/actions";
+import { filter, getDrivers, getTeams } from "../../redux/actions";
 
 const HomePage = () =>{
 
@@ -12,6 +12,7 @@ const HomePage = () =>{
     useEffect(()=>{
         dispatch(getDrivers());
         dispatch(getTeams());
+        // dispatch(filter(null, {origin: false , teams: false}))
     },[])
 
 
