@@ -23,7 +23,12 @@ const getDriverByid = async (req, res)=>{
             const soughDB = await Driver.findByPk(id, {
                 include: Team
             });
-            return res.status(200).json(soughDB);
+            const { name, surname, number, image, birthdate, nationality, Teams, description} = soughDB
+            const responseName = `${name} ${surname}`;
+            const teamsString = Teams.map(team =>{
+                return team.name
+            })
+            return res.status(200).json({ name: responseName, number, image, birthdate, nationality, teams: teamsString.join(', '), description});
         } else{
             throw new Error('Not founded');
         }
