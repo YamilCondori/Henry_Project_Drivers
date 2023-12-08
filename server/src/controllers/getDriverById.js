@@ -6,7 +6,7 @@ const getDriverByid = async (req, res)=>{
         const { id } = req.params;
         if(!id) throw Error('Please put an id Driver to find')
         if(typeof +id !== 'number' && typeof id !== 'string') throw Error('invalid type of id');
-        if(typeof +id === 'number'){
+        if(!isNaN(id)){
             let {name, number, image, dob, nationality, teams, description, driverRef} = (await axios.get("http://localhost:5000/drivers/" + id)).data
             return res.status(201).json({
                 id: +id,
@@ -19,7 +19,7 @@ const getDriverByid = async (req, res)=>{
                 description,
                 driverRef
             });
-        } else if(typeof id === 'string'){
+        } else if(isNaN(id)){
             const soughDB = await Driver.findByPk(id, {
                 include: Team
             });
