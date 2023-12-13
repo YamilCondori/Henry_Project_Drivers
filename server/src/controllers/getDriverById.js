@@ -4,6 +4,7 @@ const axios = require('axios')
 const getDriverByid = async (req, res)=>{
     try {
         const { id } = req.params;
+        const defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'
         if(!id) throw Error('Please put an id Driver to find')
         if(typeof +id !== 'number' && typeof id !== 'string') throw Error('invalid type of id');
         if(!isNaN(id)){
@@ -28,7 +29,7 @@ const getDriverByid = async (req, res)=>{
             const teamsString = Teams.map(team =>{
                 return team.name
             })
-            return res.status(200).json({ name: responseName, number, image, birthdate, nationality, teams: teamsString.join(', '), description});
+            return res.status(200).json({ name: responseName, number, image: image || defaultImage, birthdate, nationality, teams: teamsString.join(', '), description});
         } else{
             throw new Error('Not founded');
         }

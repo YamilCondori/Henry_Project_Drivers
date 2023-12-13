@@ -13,15 +13,10 @@ const postDriver = async (req, res)=>{
         })
 
         if(teams.length){
-            // const teamsAux = [...teams];
-            // for(let i=0; i<teams.length; i++){
-            //     for(let j=i; i<teamsAux.length; j++){
-            //         if(teams[i] === teamsAux[j]){
-            //             return res.status(403).send({message: 'NO se pueden repetir los teams'})
-            //         }
-            //     }
-            // }
-            teams.map(async team=>{
+            const setFromArray = new Set(teams);
+            const unrepeatedTeams = [...setFromArray];
+
+            unrepeatedTeams.map(async team=>{
                 const selectedTeam = await Team.findOne({
                     where: {name: team}
                 }); 

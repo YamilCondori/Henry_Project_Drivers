@@ -45,9 +45,12 @@ const FormPage=()=>{
         }
         
     const handleSelect=(event)=>{
-        setdriverData({
-            ...driverData,
-            teams:[...driverData.teams,event.target.value]
+        setdriverData(prevData=>{
+            if(prevData.teams.some(team=> team === event.target.value)){
+                return {...driverData}
+            }
+
+            return {...driverData, teams:[...driverData.teams,event.target.value]}
         })
         setErrors(validation({
             ...driverData,
@@ -65,9 +68,17 @@ const FormPage=()=>{
 
     const handleSubmit=(event)=>{
         event.preventDefault()
-        setSubmit(true)
         const {name, surname, image, nationality, birthdate, description, teams} = driverData
-        if(Object.keys(errors).length===0){
+
+        const ultValidation = validation(driverData)
+        // if(Object.values(driverData).every(elm => elm==='')){
+        //     setErrors({...errors, submit: 'todos los campos estan vacíos'})
+        //     return
+        // } else if(!name){    
+        //     setErrors({...errors, submit: 'El corredor debe tener un nombre'})
+        //     return
+        // } else
+        if(Object.keys(ultValidation).length===0){
             dispatch(postDriver({
                 name,
                 surname, 
@@ -77,6 +88,9 @@ const FormPage=()=>{
                 description, 
                 teams
             }))
+            setSubmit(true)
+        } else{
+            setErrors({...errors, submit: 'No pueden estar todos los campos vacíos.'})
         }
     }
     
@@ -152,7 +166,7 @@ const FormPage=()=>{
                         <textarea onChange={handleChange}  name="description" value={driverData.description}/>
                         {touched.description && errors.description ? <p>{errors.description}</p> : null}
                         </div>
-            
+                        {errors.submit && <p className="submit-error">{errors.submit}</p>}
                         <button type="submit" >CREATE DRIVER</button>
                     </form>
             
